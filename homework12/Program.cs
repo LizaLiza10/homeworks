@@ -8,7 +8,7 @@
 
             client.Authorize(Console.ReadLine(), Console.ReadLine());
 
-            Admin admin = new Admin("Gio", "paroli123", "giorgi@gmail.com");
+            Admin admin = new Admin("Gio", "paroli123", "giorga@gmail.com");
 
             client.Authorize(Console.ReadLine(), Console.ReadLine());
 
