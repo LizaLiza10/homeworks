@@ -4,83 +4,46 @@ using System.Text;
 
 namespace Homework_14
 {
-    internal static class CollectionHelper
+    internal  class CollectionHelper
     {
-        public static IEnumerable<T> Where<T>(this IEnumerable<T> collection, Func<T, bool> condition)
+        public List<string> students = new List<string>();
+        public Dictionary<string, int> scores = new Dictionary<string, int>();
+
+        public void AddStudent(string name, int score)
         {
-            foreach (var item in collection)
+            if (!scores.ContainsKey(name))
             {
-                if (condition(item))
-                {
-                    yield return item;
-                }
+                students.Add(name);
+                scores.Add(name, score);
+            }
+            else
+            {
+                Console.WriteLine("Student already exists.");
             }
         }
 
-        public static T FirstOrDefault<T>(this IEnumerable<T> collection, Func<T, bool> condition)
+        public void SearchStudent(string name)
         {
-            foreach (var item in collection)
-            {
-                if (condition(item))
-                {
-                    return item;
-                }
-            }
-
-            return default;
+            if (scores.ContainsKey(name))
+                Console.WriteLine(name + ": " + scores[name]);
+            else
+                Console.WriteLine("სტუდენტი ვერ მოიძებნა");
         }
 
-        public static bool Any<T>(this IEnumerable<T> collection, Func<T, bool> condition)
+        public void UpdateScore(string name, int newScore)
         {
-            foreach (var item in collection)
-            {
-                if (condition(item))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            if (scores.ContainsKey(name))
+                scores[name] = newScore;
+            else
+                Console.WriteLine("სტუდენტი ვერ მოიძებნა");
         }
 
-        public static bool All<T>(this IEnumerable<T> collection, Func<T, bool> condition)
+        public void ShowAll()
         {
-            foreach (var item in collection)
-            {
-                if (!condition(item))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public static int Count<T>(this IEnumerable<T> collection)
-        {
-            int count = 0;
-
-            foreach (var item in collection)
-            {
-                count++;
-            }
-
-            return count;
-        }
-
-        public static int Count<T>(this IEnumerable<T> collection, Func<T, bool> condition)
-        {
-            int count = 0;
-
-            foreach (var item in collection)
-            {
-                if (condition(item))
-                {
-                    count++;
-                }
-            }
-
-            return count;
+            foreach (string name in students)
+                Console.WriteLine(name + ": " + scores[name]);
         }
     }
+
 }
+
